@@ -11,4 +11,8 @@ public class IndexController {
     public String toindex(){
         return "index";
     }
+    @RequestMapping("HuiYuanLevel")
+    public String toHuiYuanLevel(){
+        return "huiyuan/huiyuanlevel";
+    }
 }

@@ -36,8 +36,8 @@ public class HuiYuanServiceImpl implements HuiYuanService{
     }
 
     @Override
-    public void findHuiYuanLevelById(Integer userId) {
-        huiYuanMapper.findHuiYuanLevelById(userId);
+    public User findHuiYuanLevelById(Integer userId) {
+        return huiYuanMapper.findHuiYuanLevelById(userId);
     }
 
     @Override

@@ -14,7 +14,7 @@ public interface HuiYuanService {
 
     void addHuiYuan(User user);
 
-    void findHuiYuanLevelById(Integer userId);
+    User findHuiYuanLevelById(Integer userId);
 
     void updateHuiYuanLevel(User user);
 }
