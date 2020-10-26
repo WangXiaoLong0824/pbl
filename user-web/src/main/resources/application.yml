@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: user-web
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 50000
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
