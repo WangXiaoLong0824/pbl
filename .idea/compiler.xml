@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="user-provider" />
         <module name="common" />
-        <module name="user-web" />
         <module name="eureka" />
+        <module name="user-web" />
       </profile>
     </annotationProcessing>
   </component>
