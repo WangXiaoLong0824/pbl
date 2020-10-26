@@ -11,4 +11,11 @@ public class IndexController {
     public String toindex(){
         return "index";
     }
+
+
+    @RequestMapping("home")
+    public String home(){
+        return "home";
+    }
+
 }
