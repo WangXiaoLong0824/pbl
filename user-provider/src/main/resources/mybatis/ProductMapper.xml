@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ProductMapper">
+    <select id="findProductCount" resultType="java.lang.Long">
+           select count(*) from product a
+       </select>
+    <select id="findProduct" resultType="Product">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select a.* from product a
+        limit ${key_off},${pageSize}
+    </select>
+</mapper>
