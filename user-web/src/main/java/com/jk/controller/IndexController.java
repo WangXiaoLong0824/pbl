@@ -13,9 +13,6 @@ public class IndexController {
     }
 
 
-    @RequestMapping("home")
-    public String home(){
-        return "home";
-    }
+
 
 }
