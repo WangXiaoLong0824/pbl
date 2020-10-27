@@ -17,6 +17,14 @@ public class IndexController {
         return "huiyuan/huiyuanlevel";
     }
 
+    @RequestMapping("home")
+    public String tohome(){
+        return "home";
+    }
 
 
+    @RequestMapping("product")
+    public String toproduct(){
+        return "product/lei";
+    }
 }
