@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jk.mapper.IdeaMapper" >
+<mapper namespace="com.jk.dao.IdeaMapper" >
     <select id="findIdea" resultType="Idea">
         select * from t_idea
     </select>
@@ -19,6 +19,15 @@
 
     <update id="updateIdea" parameterType="Idea">
         update t_idea set idea_name = #{ideaName},idea_phone=#{ideaPhone},idea_email=#{ideaEmail},idea_content=#{ideaContent},idea_time=#{ideaTime},
-        status_id=#{statusId},type_id=#{typeId}
+        status_id=#{statusId},type_id=#{typeId} where idea_id = #{ideaId}
     </update>
+    
+    <select id="findIdeaCount" parameterType="Idea" resultType="java.lang.Long">
+        select count(*) from t_idea
+    </select>
+
+    <select id="findIdeaPage" resultType="Idea">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select * from t_idea limit ${key_off},${pageSize}
+    </select>
 </mapper>

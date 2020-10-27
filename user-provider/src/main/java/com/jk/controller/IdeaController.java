@@ -1,7 +1,9 @@
 package com.jk.controller;
 
 import com.jk.entity.Idea;
+import com.jk.entity.PageResult;
 import com.jk.service.IdeaService;
+import org.bouncycastle.jcajce.provider.symmetric.IDEA;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,5 +60,16 @@ public class IdeaController {
         return ideaService.findIdeaById(ideaId);
     }
 
+    /**
+     * 分页
+     * @param currPage
+     * @param pageSize
+     * @param idea
+     * @return
+     */
+    @RequestMapping("findIdeaPage")
+    public PageResult findIdeaPage(@RequestParam(value="currPage",defaultValue="1") Integer currPage,@RequestParam(value="pageSize",defaultValue="10") Integer pageSize,@RequestBody Idea idea){
+        return ideaService.findIdeaPage(currPage,pageSize,idea);
+    }
 
 }

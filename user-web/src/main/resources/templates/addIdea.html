@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-table.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstarp/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstarp/bootstrap-table.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>新增留言</h1>
+        <form class="form-horizontal" th:action="@{/idea/addIdea}" method="post">
+            <input type="hidden" name="ideaId" th:value="${idea.ideaId}">
+            <div class="form-group">
+                <label for="ideaName" class="col-sm-2 control-label">留言人姓名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ideaName"  id="ideaName" placeholder="留言人姓名" th:value="${idea.ideaName}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ideaPhone" class="col-sm-2 control-label">电话</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ideaPhone"  id="ideaPhone" placeholder="电话" th:value="${idea.ideaPhone}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ideaEmail" class="col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ideaEmail"  id="ideaEmail" placeholder="邮箱" th:value="${idea.ideaEmail}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ideaContent" class="col-sm-2 control-label">留言内容</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ideaContent"  id="ideaContent" placeholder="留言内容" th:value="${idea.ideaContent}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ideaTime" class="col-sm-2 control-label">留言时间</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ideaTime"  id="ideaTime" placeholder="留言时间" th:value="${idea.ideaTime}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="statusId" class="col-sm-2 control-label">留言状态</label>
+                <div class="col-sm-10">
+                    <!--<input type="text" class="form-control" name="orderPay"  id="orderPay" placeholder="支付方式" th:value="${order.orderPay}"/>-->
+                    <select th:field="${idea.statusId}" th:value="${idea.statusId}" name="statusId" lay-verify="required">
+                        <option value="">请选择状态</option>
+                        <option th:selected="${idea.statusId==1}" value="1">已浏览</option>
+                        <option th:selected="${idea.statusId==2}" value="2">未浏览</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="typeId" class="col-sm-2 control-label">留言类型</label>
+                <div class="col-sm-10">
+                    <!--<input type="text" class="form-control" name="orderPay"  id="orderPay" placeholder="支付方式" th:value="${order.orderPay}"/>-->
+                    <select th:field="${idea.typeId}" th:value="${idea.typeId}" name="typeId" lay-verify="required">
+                        <option value="">请选择类型</option>
+                        <option th:selected="${idea.typeId==1}" value="1">投诉</option>
+                        <option th:selected="${idea.typeId==2}" value="2">建议</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" value="提交" class="btn btn-info" />
+                    <a th:href="@{/ideaList}" class="btn btn-info">返回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
