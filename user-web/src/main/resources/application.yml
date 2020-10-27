@@ -3,9 +3,12 @@ server:
 spring:
   application:
     name: user-web
+
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+
+
   redis:
     host: localhost
     port: 6379

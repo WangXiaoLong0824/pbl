@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.jk.entity.Idea;
 import com.jk.entity.PageResult;
+import com.jk.entity.Product;
 import com.jk.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public interface HuiYuanService {
     @RequestMapping("updateHuiYuanLevel")
     public void updateHuiYuanLevel(@RequestBody User user);
 
+<<<<<<< HEAD
     /**
      * ww
      * @return
@@ -48,4 +50,17 @@ public interface HuiYuanService {
 
     @RequestMapping("findIdeaPage")
     public PageResult findIdeaPage(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody Idea idea);
+=======
+
+    @RequestMapping("findProduct")
+    public PageResult findProduct(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody Product product);
+    @RequestMapping("deleteProduct")
+    public void deleteProduct(@RequestParam Integer productId);
+    @RequestMapping("addProduct")
+    public void addProduct(@RequestBody Product product);
+    @RequestMapping("findProductById")
+    public Product findProductById(@RequestParam Integer productId);
+    @RequestMapping("updateProduct")
+    public void updateProduct(@RequestBody Product product);
+>>>>>>> b0b34df86a1462af7acf7270e0fbec53d044cc00
 }

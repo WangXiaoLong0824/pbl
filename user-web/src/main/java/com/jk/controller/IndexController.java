@@ -13,11 +13,13 @@ public class IndexController {
     public String toindex(){
         return "index";
     }
-    @RequestMapping("HuiYuanLevel")
-    public String toHuiYuanLevel(){
+
+    @RequestMapping("huiYuanLevel")
+    public String tohuiYuanLevel(){
         return "huiyuan/huiyuanlevel";
     }
 
+<<<<<<< HEAD
     @RequestMapping("toIdeaList")
     public String toIdeaList(){ return "ideaList"; }
     @RequestMapping("toAddIdea")
@@ -25,4 +27,8 @@ public class IndexController {
         model.addAttribute("idea",new Idea());
         return "addIdea";
     }
+=======
+
+
+>>>>>>> b0b34df86a1462af7acf7270e0fbec53d044cc00
 }
