@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../web/js/vue.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+</head>
+<body>
+        <div id="app" class="container">
+            <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
+            <h1>留言列表</h1>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>用户名</th>
+                    <th>留言内容</th>
+                    <th>时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="mes in mesList">
+                    <td>{{mes.ideaId}}</td>
+                    <td>{{mes.ideaName}}</td>
+                    <td>{{mes.ideaContent}}</td>
+                    <td>{{mes.ideaTime}}</td>
+                    <td>{{mes.statusId==1?"已浏览":"未浏览"}}</td>
+                    <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(mes.ideaId)">删除</button>
+                        <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(mes.ideaId)">修改</button></td>
+                </tr>
+            </table>
+            <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
+        </div>
+
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" id="ppa">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">留言信息</h3>
+                    </div>
+                    <form id="forms" method="post">
+                        <div class="modal-body">
+                            <table class="table table-bordered table-striped"  width="800px">
+                                <input class="form-control" name="ideaId" style="display:none" readonly="readonly" v-model="mes.ideaId">
+                                <tr>
+                                    <td>姓名</td>
+                                    <td><input class="form-control" type="text" name="ideaName" placeholder="姓名" v-model="mes.ideaName"></td>
+                                </tr>
+                                <tr>
+                                    <td>电话</td>
+                                    <td><input class="form-control" type="text" name="ideaPhone" placeholder="电话" v-model="mes.ideaPhone"></td>
+                                </tr>
+                                <tr>
+                                    <td>邮箱</td>
+                                    <td><input class="form-control" type="text" name="ideaEmail" placeholder="邮箱" v-model="mes.ideaEmail"></td>
+                                </tr>
+                                <tr>
+                                    <td>留言内容</td>
+                                    <td><input class="form-control" type="text" name="ideaContent" placeholder="留言内容" v-model="mes.ideaContent"></td>
+                                </tr>
+                                <tr>
+                                    <td>留言时间</td>
+                                    <td><input class="form-control" type="date" name="ideaTime" placeholder="留言时间" v-model="mes.ideaTime"></td>
+                                </tr>
+                                <tr>
+                                    <td>留言状态</td>
+                                    <td><input type="radio" name="statusId" v-model="mes.statusId" value="1">已浏览
+                                        <input type="radio" name="statusId" v-model="mes.statusId" value="2">未浏览</td>
+                                </tr>
+                                <tr>
+                                    <td>留言类型</td>
+                                    <td><input type="radio" name="typeId" v-model="mes.typeId" value="1">投诉
+                                        <input type="radio" name="typeId" v-model="mes.typeId" value="2">建议</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" onclick="insert()">保存</button>
+                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                mesList: "",
+                totalPage:"",
+                total:"",
+                currPage:"",
+                pageSize:""
+            }
+        })
+
+        $(function() {
+            searchMesList();
+        })
+
+        function searchMesList(){
+            $.ajax({
+                type:"get",
+                url:"../idea/findMesPage",
+                data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
+                dataType:"json",
+                success: function(result) {
+                    vm.mesList = result.rows;
+                    vm.totalPage = result.totalPage;
+                    vm.total = result.total;
+                    vm.currPage = result.currPage;
+                    vm.pageSize = result.pageSize;
+                    setPage(result.currPage,result.totalPage,result.pageSize,searchMesList);
+                },
+                error : function() {
+                    alert("系统错误，请联系管理员！");
+                }
+            })
+        }
+
+        function setPage(pageCurrent,pageSum,pageSize,callback){
+            $('#pageLimit').bootstrapPaginator({
+                currentPage:pageCurrent,
+                totalPages:pageSum,
+                size:"normal",
+                bootstrapMajorVersion:3,
+                alignment:"right",
+                numberOfPages:pageSize,
+                itemTexts:function(type,page,current){
+                    switch(type){
+                        case "first" : return "首页";
+                        case "prev" : return "上一页";
+                        case "next" : return "下一页";
+                        case "last" : return "末页";
+                        case "page" : return page;
+                    }
+                },
+                onPageClicked: function(event,originalEvent,type,page){
+                    vm.currPage = page;
+                    callback && callback()
+                }
+            });
+        }
+
+        function del(ideaId){
+            $.ajax({
+                url:'../idea/deleteMesById',
+                type:'post',
+                data:{"ideaId":ideaId},
+                dataType:"json",
+                success:function(){
+
+                }
+            })
+            alert("删除成功");
+            searchMesList();
+        }
+
+        var vs = new Vue({
+            el: '#ppa',
+            data: {
+                mes:''
+            }
+        })
+
+        function insert(){
+            $.ajax({
+                url:'../idea/addMes',
+                type:'post',
+                data:$('#forms').serialize(),
+                success:function(){
+                    searchMesList();
+                }
+            })
+        }
+
+        function update(ideaId){
+            $.ajax({
+                url:"../idea/findMesById",
+                type:"post",
+                data:{"ideaId":ideaId},
+                success:function(data){
+                    vs.mes=data;
+                },
+            });
+        }
+    </script>
+</body>
+</html>
