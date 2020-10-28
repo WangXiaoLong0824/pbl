@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:text-align="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -74,12 +75,55 @@
             <td>{{product.productOldPrice}}</td>
             <td>{{product.productNewPrice}}</td>
             <td>{{product.createTime}}</td>
-            <td>{{product.productStatus}}</td>
+            <td>{{product.productStatus==1?"启用":"未启用"}}</td>
             <td>
                 <a class="btn btn-default" data-toggle="modal" data-target="#editModal" @click="findOne(product.productId)">修改</a> |
             </td>
         </tr>
     </table>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content" position:left>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">产品新增</h3>
+            </div>
+            <form action="product/addProduct" method="post">
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" >
+                        <tr>
+                            <td><input type="hidden" name="productId" id="productId"></td>
+                        </tr>
+                        <tr>
+                            <td>产品编号</td>
+                            <td><input class="form-control" name="productNum" id="productNum"></td>
+                        </tr>
+                        <tr>
+                            <td>产品名称</td>
+                            <td><input  class="form-control" name="productName" id="productName">  </td>
+                        </tr>
+                        <tr>
+                            <td>原价</td>
+                            <td><input  class="form-control" name="productOldPrice" id="productOldPrice">  </td>
+                        </tr>
+                        <tr>
+                            <td>现价</td>
+                            <td><input  class="form-control" name="productNewPrice" id="productNewPrice">  </td>
+                        </tr>
+                        <tr>
+                            <td>状态</td>
+                            <td> <input type="radio" value="1" name="productStatus">可用</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 <script>
@@ -121,9 +165,14 @@
             type:"post",
             url:"product/findProduct",
             dataType:"json",
-            success:function(data){
-                console.log(data.row)
-                vm.productList = data.row;
+            success:function(result){
+                vm.productList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize);
+
             },
             error:function(){
                 alert("系统错误，请联系管理员！");
