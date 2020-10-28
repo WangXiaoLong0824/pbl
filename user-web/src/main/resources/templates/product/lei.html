@@ -44,7 +44,7 @@
             <div class="title_names">搜索查询</div>
             <ul class="search_content clearfix">
                 <li><label class="l_f">产品名称</label><input name="" type="text"  class="text_add" placeholder="输入品牌名称"  style=" width:250px"/></li>
-                <li><label class="l_f">添加时间</label><input class="inline laydate-icon" id="start" style=" margin-left:10px;"></li>
+                <!--<li><label class="l_f">添加时间</label><input class="inline laydate-icon" id="start" style=" margin-left:10px;"></li>-->
                 <li style="width:90px;"><button type="button" class="btn_search"><i class="icon-search"></i>查询</button></li>
             </ul>
         </div>
@@ -81,64 +81,69 @@
             </td>
         </tr>
     </table>
+    <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
 </div>
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
-        <div class="modal-content" position:left>
+<div class="modal fade"  id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-left:0px">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">产品新增</h3>
             </div>
-            <form action="product/addProduct" method="post">
                 <div class="modal-body">
+                    <form id="productForm">
                     <table class="table table-bordered table-striped" >
                         <tr>
-                            <td><input type="hidden" name="productId" id="productId"></td>
+                            <td><input type="hidden" name="productId" id="productId" v-model="product.productId"></td>
                         </tr>
                         <tr>
                             <td>产品编号</td>
-                            <td><input class="form-control" name="productNum" id="productNum"></td>
+                            <td><input class="form-control" name="productNum" id="productNum" v-model="product.productNum"></td>
                         </tr>
                         <tr>
                             <td>产品名称</td>
-                            <td><input  class="form-control" name="productName" id="productName">  </td>
+                            <td><input  class="form-control" name="productName" id="productName" v-model="product.productName">  </td>
                         </tr>
                         <tr>
                             <td>原价</td>
-                            <td><input  class="form-control" name="productOldPrice" id="productOldPrice">  </td>
+                            <td><input  class="form-control" name="productOldPrice" id="productOldPrice" v-model="product.productOldPrice">  </td>
                         </tr>
                         <tr>
                             <td>现价</td>
-                            <td><input  class="form-control" name="productNewPrice" id="productNewPrice">  </td>
+                            <td><input  class="form-control" name="productNewPrice" id="productNewPrice" v-model="product.productNewPrice">  </td>
                         </tr>
                         <tr>
                             <td>状态</td>
-                            <td> <input type="radio" value="1" name="productStatus">可用</td>
+                            <td> <input type="radio" value="1" name="productStatus" v-model="product.productStatus">可用
+                                <input type="radio" value="2" name="productStatus" v-model="product.productStatus">不可用
+                            </td>
                         </tr>
                     </table>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" type="submit">保存</button>
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="saveProduct()">保存</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>
-</body>
+
 <script>
     function findOne(productId) {
         alert(productId);
         $.ajax({
             type:'get',
-            url:'/findOne',
+            url:'product/findProductById',
             data:{'productId': productId},
             dataType: 'json',
             success: function (result){
                 $("#productId").val(result.productId);
-                $("#userName").val(result.userName);
-                $("#password").val(result.password);
-                alert(result);
+                $("#productNum").val(result.productNum);
+                $("#productName").val(result.productName);
+                $("#productNewPrice").val(result.productNewPrice);
+                $("#productOldPrice").val(result.productOldPrice);
+                $("input[name=productStatus][value="+result.productStatus+"]").attr("checked",true);
             },
             error: function () {
                 alert("系统错误，请联系管理员！");
@@ -146,6 +151,21 @@
         })
     }
 
+    function saveProduct(){
+        $.ajax({
+            type:'post',
+            url:'/product/addProduct',
+            data:$("#productForm").serialize(),
+            dataType:'json',
+            success: function (result) {
+                alert("成功");
+                searchProductList();
+            },
+            error: function () {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     var vm = new Vue({
         el: '#app',
         data: {
@@ -164,6 +184,7 @@
         $.ajax({
             type:"post",
             url:"product/findProduct",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
             dataType:"json",
             success:function(result){
                 vm.productList = result.rows;
@@ -179,6 +200,30 @@
             }
         })
     }
+    function setPage(pageCurrent,pageSum,pageSize,callback){
+        $('#pageLimit').bootstrapPaginator({
+            currentPage:pageCurrent,
+            totalPages:pageSum,
+            size:"normal",
+            bootstrapMajorVersion:3,
+            alignment:"right",
+            numberOfPages:pageSize,
+            itemTexts:function(type,page,current){
+                switch(type){
+                    case "first" : return "首页";
+                    case "prev" : return "上一页";
+                    case "next" : return "下一页";
+                    case "last" : return "末页";
+                    case "page" : return page;
+                }
+            },
+            onPageClicked: function(event,originalEvent,type,page){
+                vm.currPage = page;
+               /* callback && callback()*/
+                searchProductList();
+            }
+        });
+    }
     function deleteById($event,productId) {
         vm.selectIds = [];
         if ($event.target.checked) {
@@ -192,23 +237,20 @@
     function deleteProduct(){
         $.ajax({
             type:'post',
-            url:'/deleteProduct',
-            data:{'id': vm.selectIds.toString()},
+            url:'product/deleteProduct',
+            data:{'productId': vm.selectIds.toString()},
             dataType:'json',
             success:function (result) {
-                if (result.success) {
-                    alert(result.message);
-                    searchProductList();
-                    $("input[type='checkbox']").prop("checked", false);
-                } else {
-                    alert(result.message);
-                }
+                searchProductList();
+                $("input[type='checkbox']").prop("checked", false);
+
             },
             error: function (result) {
-                alert(result.message);
+                searchProductList();
             }
         })
     }
 
 </script>
+</body>
 </html>

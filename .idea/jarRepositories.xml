@@ -12,7 +12,6 @@
       <option name="url" value="http://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
-<<<<<<< HEAD
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="http://maven.aliyun.com/nexus/content/repositories/central/" />
@@ -28,8 +27,6 @@
       <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public" />
     </remote-repository>
     <remote-repository>
-=======
->>>>>>> 5a3774e2b7a948e660d9c58a04d4532e77bf1c31
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
