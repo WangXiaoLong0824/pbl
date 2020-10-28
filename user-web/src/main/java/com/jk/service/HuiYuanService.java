@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.entity.Idea;
-import com.jk.entity.PageResult;
-import com.jk.entity.Product;
-import com.jk.entity.User;
+import com.jk.entity.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,4 +71,12 @@ public interface HuiYuanService {
     public Product findProductById(@RequestParam Integer productId);
     @RequestMapping("updateProduct")
     public void updateProduct(@RequestBody Product product);
+
+    //shiro
+    @RequestMapping("selectPowerKeyList")
+    public List<String> selectPowerKeyList(@RequestParam Integer id);
+    @RequestMapping("selectUserInfoByCode")
+    public SysUser selectUserInfoByCode(@RequestParam String userCode);
+    @RequestMapping("selectTreeList")
+    public List<Tree> selectTreeList(@RequestParam Integer id);
 }

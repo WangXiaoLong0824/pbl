@@ -1,7 +1,6 @@
 package com.jk.entity;
 
 import lombok.Data;
-
 @Data
 public class User {
 
@@ -25,7 +24,6 @@ public class User {
 
     //业务
     private String levelName;
-
 
 
 }

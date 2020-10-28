@@ -18,6 +18,10 @@ public class IndexController {
     public String tohuiYuanLevel(){
         return "huiyuan/huiyuanlevel";
     }
+    @RequestMapping("huiYuan")
+    public String huiYuan(){
+        return "huiyuan/huiyuan";
+    }
 
     @RequestMapping("toIdeaList")
     public String toIdeaList(){ return "idea/ideaList"; }

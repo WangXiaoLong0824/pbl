@@ -32,7 +32,12 @@ public class HuiYuanServiceImpl implements HuiYuanService{
 
     @Override
     public void addHuiYuan(User user) {
-        huiYuanMapper.addHuiYuan(user);
+        if (user.getUserId()==null){
+            huiYuanMapper.addHuiYuan(user);
+        }else{
+            huiYuanMapper.updateHuiYuanLevel(user);
+        }
+
     }
 
     @Override
