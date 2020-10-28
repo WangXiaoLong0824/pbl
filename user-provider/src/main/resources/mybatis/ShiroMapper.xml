@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ShiroMapper">
+   <select id="selectTreeList" resultType="Tree">
+        select sp.id id,sp.text text,sp.url href,sp.parentid pid from
+                         sys_user_role sur,
+                        sys_role_permission srp,
+                        sys_permission sp
+                        where sur.sysuserid=#{userId} and
+                        sur.sysroleid = srp.sysroleid and
+                        srp.syspermissionid = sp.id and
+                        sp.parentid=#{pid} and
+                        sp.type = 'menu'
+   </select>
+</mapper>

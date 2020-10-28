@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.dao.HuiYuanMapper">
     <sql id="mySql">
-         <if test="user.userName != null and user.userName != ''">and a.user_name like "%${user.usesrName}%"</if>
+         <if test="user.userName != null and user.userName != ''">and a.user_name like "%${user.userName}%"</if>
     </sql>
        <select id="findHuiYuanLevelCount" resultType="java.lang.Long">
-           select count(*) from user a,level b where a.level_id=b.level_id <include refid="mySql"></include>
+           select count(*) from user a,level b where a.level_id=b.level_id <if test="user.userName != null and user.userName != ''">and a.user_name like "%${user.userName}%"</if>
        </select>
     <select id="findHuiYuanLevel" resultType="User">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
         select a.*,b.level_name levelName from user a,level b where a.level_id=b.level_id
-        <include refid="mySql"></include>
+        <if test="user.userName != null and user.userName != ''">and a.user_name like "%${user.userName}%"</if>
         limit ${key_off},${pageSize}
     </select>
 </mapper>
