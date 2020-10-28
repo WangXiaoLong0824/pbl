@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("idea")
 public class IdeaController {
 
@@ -20,31 +20,47 @@ public class IdeaController {
     private HuiYuanService huiyuanService;
 
     @RequestMapping("findIdea")
-    public String findIdea(Model model){
-        model.addAttribute("ideaList",huiyuanService.findIdea());
-        return "ideaList";
+    public List<Idea> findIdea(){
+        return huiyuanService.findIdea();
     }
 
     @RequestMapping("addIdea")
-    public String addIdea(Idea idea){
+    public void addIdea(Idea idea){
         huiyuanService.addIdea(idea);
-        return "redirect:findIdea";
     }
 
     @RequestMapping("deleteIdea")
-    public String deleteIdea(Integer ideaId){
+    public void deleteIdea(Integer ideaId){
         huiyuanService.deleteById(ideaId);
-        return "redirect:findIdea";
     }
 
     @RequestMapping("findOne")
-    public String findOne(Integer ideaId,Model model){
-        model.addAttribute("idea",huiyuanService.findIdeaById(ideaId));
-        return "addIdea";
+    public Idea findOne(Integer ideaId){
+        return huiyuanService.findIdeaById(ideaId);
     }
 
     @RequestMapping("findIdeaPage")
     public PageResult findIdeaPage(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Idea idea){
         return huiyuanService.findIdeaPage(currPage,pageSize,idea);
+    }
+
+    @RequestMapping("findMesPage")
+    public PageResult findMesPage(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize, Idea idea){
+        return huiyuanService.findMessagePage(currPage,pageSize,idea);
+    }
+
+    @RequestMapping("addMes")
+    public void addMes(Idea idea){
+        huiyuanService.addMessage(idea);
+    }
+
+    @RequestMapping("deleteMesById")
+    public void deleteMesById(Integer ideaId){
+        huiyuanService.deleteMesById(ideaId);
+    }
+
+    @RequestMapping("findMesById")
+    public Idea findMesById(Integer ideaId){
+        return huiyuanService.findMesById(ideaId);
     }
 }

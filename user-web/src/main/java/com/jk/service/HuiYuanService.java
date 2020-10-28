@@ -31,7 +31,6 @@ public interface HuiYuanService {
     @RequestMapping("updateHuiYuanLevel")
     public void updateHuiYuanLevel(@RequestBody User user);
 
-<<<<<<< HEAD
     /**
      * ww
      * @return
@@ -50,7 +49,20 @@ public interface HuiYuanService {
 
     @RequestMapping("findIdeaPage")
     public PageResult findIdeaPage(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody Idea idea);
-=======
+
+    @RequestMapping("findMessagePage")
+    public PageResult findMessagePage(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody Idea idea);
+
+    @RequestMapping("addMessage")
+    public String addMessage(@RequestBody Idea idea);
+
+    @RequestMapping("deleteMesById")
+    public String deleteMesById(@RequestParam Integer ideaId);
+
+    @RequestMapping("findMesById")
+    public Idea findMesById(@RequestParam Integer ideaId);
+
+
 
     @RequestMapping("findProduct")
     public PageResult findProduct(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody Product product);
@@ -62,5 +74,4 @@ public interface HuiYuanService {
     public Product findProductById(@RequestParam Integer productId);
     @RequestMapping("updateProduct")
     public void updateProduct(@RequestBody Product product);
->>>>>>> b0b34df86a1462af7acf7270e0fbec53d044cc00
 }

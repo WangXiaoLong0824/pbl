@@ -45,4 +45,31 @@ public class IdeaServiceImpl implements IdeaService{
         Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
         return new PageResult(total,ideaList,currPage,pageSize,totalPage);
     }
+
+    @Override
+    public PageResult findMessagePage(Integer currPage, Integer pageSize, Idea idea) {
+        Long total = ideaMapper.findMesCount(idea);
+        List<Idea> ideaList = ideaMapper.findMessagePage(currPage,pageSize,idea);
+        Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
+        return new PageResult(total,ideaList,currPage,pageSize,totalPage);
+    }
+
+    @Override
+    public void addMessage(Idea idea) {
+        if (idea.getIdeaId() == null){
+            ideaMapper.addIdea(idea);
+        }else{
+            ideaMapper.updateIdea(idea);
+        }
+    }
+
+    @Override
+    public void deleteMesById(Integer ideaId) {
+        ideaMapper.deleteMesById(ideaId);
+    }
+
+    @Override
+    public Idea findMesById(Integer ideaId) {
+        return ideaMapper.findMesById(ideaId);
+    }
 }

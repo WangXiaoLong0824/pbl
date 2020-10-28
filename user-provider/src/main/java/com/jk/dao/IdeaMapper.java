@@ -20,4 +20,12 @@ public interface IdeaMapper {
     Long findIdeaCount(Idea idea);
 
     List<Idea> findIdeaPage(Integer currPage, Integer pageSize, Idea idea);
+
+    Long findMesCount(Idea idea);
+
+    List<Idea> findMessagePage(Integer currPage, Integer pageSize, Idea idea);
+
+    void deleteMesById(Integer ideaId);
+
+    Idea findMesById(Integer ideaId);
 }

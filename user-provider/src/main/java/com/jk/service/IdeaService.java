@@ -15,4 +15,12 @@ public interface IdeaService {
     Idea findIdeaById(Integer ideaId);
 
     PageResult findIdeaPage(Integer currPage, Integer pageSize, Idea idea);
+
+    PageResult findMessagePage(Integer currPage, Integer pageSize, Idea idea);
+
+    void addMessage(Idea idea);
+
+    void deleteMesById(Integer ideaId);
+
+    Idea findMesById(Integer ideaId);
 }

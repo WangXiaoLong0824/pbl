@@ -20,11 +20,13 @@ public class IndexController {
     }
 
     @RequestMapping("toIdeaList")
-    public String toIdeaList(){ return "ideaList"; }
-    @RequestMapping("toAddIdea")
-    public String toAddIdea(Model model){
-        model.addAttribute("idea",new Idea());
-        return "addIdea";
+    public String toIdeaList(){ return "idea/ideaList"; }
+    @RequestMapping("toMesList")
+    public String toMesList(){ return "idea/mesList"; }
+
+    @RequestMapping("tohua")
+    public String tohua(){
+        return "111";
     }
 
     @RequestMapping("home")

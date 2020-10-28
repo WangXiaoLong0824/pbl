@@ -30,4 +30,21 @@
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
         select * from t_idea limit ${key_off},${pageSize}
     </select>
+
+    <select id="findMesCount" parameterType="Idea" resultType="java.lang.Long">
+        select count(*) from t_idea
+    </select>
+
+    <select id="findMessagePage" resultType="Idea">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select * from t_idea limit ${key_off},${pageSize}
+    </select>
+
+    <delete id="deleteMesById" parameterType="int">
+        delete from t_idea where idea_id = #{ideaId}
+    </delete>
+
+    <select id="findMesById" parameterType="int" resultType="Idea">
+        select * from t_idea where idea_id = #{ideaId}
+    </select>
 </mapper>
