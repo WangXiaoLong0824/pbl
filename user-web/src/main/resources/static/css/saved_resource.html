@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0055)http://localhost:8080/shopxxb2b2c/admin/store_rank/list -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>店铺等级列表 - Powered By SHOP++</title>
+<meta name="author" content="SHOP++ Team">
+<meta name="copyright" content="SHOP++">
+<link href="./common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./jquery.js.下载"></script>
+<script type="text/javascript" src="./common.js.下载"></script>
+<script type="text/javascript" src="./list.js.下载"></script>
+<script type="text/javascript">
+$().ready(function() {
+
+
+});
+</script>
+</head>
+<body>
+	<div class="breadcrumb">
+		<a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a> » 店铺等级列表 <span>(共8条记录)</span>
+	</div>
+	<form id="listForm" action="http://localhost:8080/shopxxb2b2c/admin/store_rank/list" method="get">
+		<div class="bar">
+			<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/add" class="iconButton">
+				<span class="addIcon">&nbsp;</span>添加
+			</a>
+			<div class="buttonGroup">
+				<a href="javascript:;" id="deleteButton" class="iconButton disabled">
+					<span class="deleteIcon">&nbsp;</span>删除
+				</a>
+				<a href="javascript:;" id="refreshButton" class="iconButton">
+					<span class="refreshIcon">&nbsp;</span>刷新
+				</a>
+				<div id="pageSizeMenu" class="dropdownMenu">
+					<a href="javascript:;" class="button">
+						每页显示<span class="arrow">&nbsp;</span>
+					</a>
+					<ul style="display: none;">
+						<li val="10">10</li>
+						<li class="current" val="20">20</li>
+						<li val="50">50</li>
+						<li val="100">100</li>
+					</ul>
+				</div>
+			</div>
+			<div id="searchPropertyMenu" class="dropdownMenu">
+				<div class="search">
+					<span class="arrow">&nbsp;</span>
+					<input type="text" id="searchValue" name="searchValue" value="" maxlength="200">
+					<button type="submit">&nbsp;</button>
+				</div>
+				<ul style="display: none;">
+					<li val="name" class="current">名称</li>
+				</ul>
+			</div>
+		</div>
+		<table id="listTable" class="list">
+			<tbody><tr>
+				<th class="check">
+					<input type="checkbox" id="selectAll">
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="name">名称</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="serviceFee">服务费</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="quantity">可发布商品数</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="memo">备注</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="isAllowRegister">是否允许注册</a>
+				</th>
+				<th>
+					<a href="javascript:;" class="sort" name="order">排序</a>
+				</th>
+				<th>
+					<span>操作</span>
+				</th>
+			</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="1">
+					</td>
+					<td>
+						普通店铺
+					</td>
+					<td>
+						￥0.00
+					</td>
+					<td>
+						50
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						是
+					</td>
+					<td>
+						1
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=1">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="2">
+					</td>
+					<td>
+						铜牌店铺
+					</td>
+					<td>
+						￥100.00
+					</td>
+					<td>
+						100
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						是
+					</td>
+					<td>
+						2
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=2">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="3">
+					</td>
+					<td>
+						银牌店铺
+					</td>
+					<td>
+						￥300.00
+					</td>
+					<td>
+						300
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						是
+					</td>
+					<td>
+						3
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=3">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="4">
+					</td>
+					<td>
+						金牌店铺
+					</td>
+					<td>
+						￥500.00
+					</td>
+					<td>
+						500
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						是
+					</td>
+					<td>
+						4
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=4">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="5">
+					</td>
+					<td>
+						普通自营店铺
+					</td>
+					<td>
+						￥0.00
+					</td>
+					<td>
+						500
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						否
+					</td>
+					<td>
+						5
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=5">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="6">
+					</td>
+					<td>
+						铜牌自营店铺
+					</td>
+					<td>
+						￥0.00
+					</td>
+					<td>
+						1000
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						否
+					</td>
+					<td>
+						6
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=6">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="7">
+					</td>
+					<td>
+						银牌自营店铺
+					</td>
+					<td>
+						￥0.00
+					</td>
+					<td>
+						3000
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						否
+					</td>
+					<td>
+						7
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=7">[编辑]</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="8">
+					</td>
+					<td>
+						金牌自营店铺
+					</td>
+					<td>
+						￥0.00
+					</td>
+					<td>
+						5000
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						否
+					</td>
+					<td>
+						8
+					</td>
+					<td>
+						<a href="http://localhost:8080/shopxxb2b2c/admin/store_rank/edit?id=8">[编辑]</a>
+					</td>
+				</tr>
+		</tbody></table>
+<input type="hidden" id="pageSize" name="pageSize" value="20">
+<input type="hidden" id="searchProperty" name="searchProperty" value="name">
+<input type="hidden" id="orderProperty" name="orderProperty" value="">
+<input type="hidden" id="orderDirection" name="orderDirection" value="">
+	</form>
+
+</body></html>
