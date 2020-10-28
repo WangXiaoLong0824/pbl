@@ -38,6 +38,11 @@ public class IndexController {
         return "home";
     }
 
+    @RequestMapping("login")
+    public String tologin(){
+        return "login";
+    }
+
     @RequestMapping("product")
     public String toproduct(){
         return "product/lei";

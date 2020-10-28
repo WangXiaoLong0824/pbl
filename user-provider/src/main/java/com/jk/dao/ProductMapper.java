@@ -11,7 +11,7 @@ public interface ProductMapper {
     List<Product> findProduct(Integer currPage, Integer pageSize, Product product);
     @Delete("delete from product where product_id=#{productId}")
     void deleteProduct(Integer productId);
-    @Insert("insert into product values(#{productId},#{productNum},#{productName},#{productOldPrice},#{productNewPrice},#{productCountry},#{createTime},#{productStatus})")
+    @Insert("insert into product values(#{productId},#{productNum},#{productName},#{productOldPrice},#{productNewPrice},null,now(),#{productStatus})")
     void addProduct(Product product);
     @Select("select * from product where product_id=#{productId}")
     Product findProductById(Integer productId);
