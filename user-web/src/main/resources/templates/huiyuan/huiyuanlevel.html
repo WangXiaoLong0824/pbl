@@ -36,7 +36,6 @@
     <script type="text/javascript" src="../web/js/vue.min.js"></script>
     <script type="text/javascript" src="../web/js/bootstrap-paginator.js"></script>
 
-    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
 </head>
 <body>
 <div class="breadcrumb">
@@ -58,7 +57,7 @@
             <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="name" v-model="name" placeholder="请输入名字">
+                    <input type="text" class="form-control" id="name" v-model="userName1" placeholder="请输入名字">
                 </div>
             </div>
             <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>
@@ -78,6 +77,7 @@
                 <th>等级</th>
                 <th>积分</th>
                 <th>状态</th>
+                <th>操作</th>
             </tr>
             <tr v-for="storeCategory in storeCategoryList">
                 <td>
@@ -85,12 +85,13 @@
                 </td>
                 <td>{{storeCategory.userId}}</td>
                 <td>{{storeCategory.userName}}</td>
-                <td>{{storeCategory.userSex}}</td>
+                <td>{{storeCategory.userSex==1?"男":"女"}}</td>
                 <td>{{storeCategory.userPhone}}</td>
                 <td>{{storeCategory.userEmail}}</td>
                 <td>{{storeCategory.createTime}}</td>
                 <td>{{storeCategory.levelName}}</td>
                 <td>{{storeCategory.userJiFen}}</td>
+                <td>{{storeCategory.userStatus==1?"启用":"未启用"}}</td>
 
                 <td>
                     <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" v-on:click="findOne(storeCategory.userId)" >修改</button>
@@ -108,51 +109,51 @@
 <!-- 编辑窗口 -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" >
-        <div class="modal-content">
+        <form class="modal-content" id="#userForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">会员等级</h3>
             </div>
-            <div class="modal-body">
-                <table class="table table-bordered table-striped"  width="800px">
-                    <tr>
-                        <td>编号</td>
-                        <td><input id="userId" name="userId" class="form-control"  placeholder="编号" v-model="storeCategory.userId">  </td>
-                    </tr>
-                    <tr>
-                        <td>名称</td>
-                        <td><input id="userName" name="userName" class="form-control" placeholder="名称" v-model="storeCategory.userName">  </td>
-                    </tr>
-                    <tr>
-                        <td>性别</td>
-                        <td><input id="userSex" name="userSex" class="form-control" placeholder="性别" v-model="storeCategory.userSex">  </td>
-                    </tr>
-                    <td>手机</td>
-                    <td><input id="userPhone" name="userPhone" class="form-control" placeholder="手机" v-model="storeCategory.userPhone">  </td>
-                    </tr>
-                    <td>邮箱</td>
-                    <td><input id="userEmail" name="userEmail" class="form-control" placeholder="邮箱" v-model="storeCategory.userEmail">  </td>
-                    </tr>
-                    <td>加入时间</td>
-                    <td><input id="createTime" name="createTime" class="form-control" placeholder="加入时间" v-model="storeCategory.createTime">  </td>
-                    </tr>
-                    <td>等级</td>
-                    <td><input id="levelId" name="levelId" class="form-control" placeholder="等级" v-model="storeCategory.levelName">  </td>
-                    </tr>
-                    <td>积分</td>
-                    <td><input id="userJiFen" name="userJiFen" class="form-control" placeholder="积分" v-model="storeCategory.userJiFen">  </td>
-                    </tr>
-                    <td>状态</td>
-                    <td><input id="userStatus" name="userStatus" class="form-control" placeholder="状态" v-model="storeCategory.userStatus">  </td>
-                    </tr>
-                    <!-- <input type="hidden" v-model="storeCategory.id"> -->
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="saveStoreCategory()">保存</button>
-                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-            </div>
-        </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped"  width="800px">
+                        <tr>
+                            <td>编号</td>
+                            <td><input id="userId" name="userId" class="form-control"  placeholder="编号" v-model="storeCategory.userId">  </td>
+                        </tr>
+                        <tr>
+                            <td>名称</td>
+                            <td><input id="userName" name="userName" class="form-control" placeholder="名称" v-model="storeCategory.userName">  </td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td><input id="userSex" name="userSex" class="form-control" placeholder="性别" v-model="storeCategory.userSex">  </td>
+                        </tr>
+                        <td>手机</td>
+                        <td><input id="userPhone" name="userPhone" class="form-control" placeholder="手机" v-model="storeCategory.userPhone">  </td>
+                        </tr>
+                        <td>邮箱</td>
+                        <td><input id="userEmail" name="userEmail" class="form-control" placeholder="邮箱" v-model="storeCategory.userEmail">  </td>
+                        </tr>
+                        <td>加入时间</td>
+                        <td><input id="createTime" name="createTime" class="form-control" placeholder="加入时间" v-model="storeCategory.createTime">  </td>
+                        </tr>
+                        <td>等级</td>
+                        <td><input id="levelId" name="levelId" class="form-control" placeholder="等级" v-model="storeCategory.levelName">  </td>
+                        </tr>
+                        <td>积分</td>
+                        <td><input id="userJiFen" name="userJiFen" class="form-control" placeholder="积分" v-model="storeCategory.userJiFen">  </td>
+                        </tr>
+                        <td>状态</td>
+                        <td><input id="userStatus" name="userStatus" class="form-control" placeholder="状态" v-model="storeCategory.userStatus">  </td>
+                        </tr>
+                        <!-- <input type="hidden" v-model="storeCategory.id"> -->
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="saveStoreCategory()">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+        </form>
     </div>
 </div>
 
@@ -166,7 +167,7 @@
             total:"",
             currPage:"",
             pageSize:"",
-            name:""
+            userName1:""
         }
     })
 
@@ -177,7 +178,7 @@
         $.ajax({
             type:"post",
             url:"../huiYuan/findHuiYuanLevel",
-            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"name":vm.name},
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"userName":vm.userName1},
             dataType:"json",
             success: function(result) {
                 vm.storeCategoryList = result.rows;
@@ -257,12 +258,10 @@
     }
     //保存
     function saveStoreCategory() {
-        /*  console.log(vm.storeCategory)
-        if (vm.storeCategory.id == null || vm.storeCategory.id =="") { */
         $.ajax({
             type:'post',
-            url:'../storeCategory/addStoreCategory',
-            data:vm.storeCategory,
+            url:'../huiYuan/addHuiYuan',
+            data:$("#userForm").serialize(),
             dataType:'json',
             success: function (result) {
                 alert("成功")
@@ -271,20 +270,6 @@
                 alert("系统错误，请联系管理员！");
             }
         })
-        /* } else {
-            $.ajax({
-                type:'post',
-                url:'../storeCategory/updateStoreCategory',
-                data:vm.storeCategory,
-                dataType:'json',
-                success: function (result) {
-                     alert("成功")
-                },
-                error: function () {
-                    alert("系统错误，请联系管理员！");
-                }
-            })
-        } */
     }
     //修改回显
     function findOne(id) {
