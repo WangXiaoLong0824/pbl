@@ -123,6 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="saveProduct()">保存</button>
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="updateProduct()">修改</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
                 </div>
         </div>
@@ -151,6 +152,18 @@
         })
     }
 
+    function updateProduct(){
+        $.ajax({
+            type:'post',
+            url:'/product/updateProduct',
+            data:$("#productForm").serialize(),
+            dataType:'json',
+            success: function (result) {
+                alert("成功");
+            },
+        })
+        searchProductList();
+    }
     function saveProduct(){
         $.ajax({
             type:'post',
@@ -159,12 +172,10 @@
             dataType:'json',
             success: function (result) {
                 alert("成功");
-                searchProductList();
+
             },
-            error: function () {
-                alert("系统错误，请联系管理员！");
-            }
         })
+        searchProductList();
     }
     var vm = new Vue({
         el: '#app',
