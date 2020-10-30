@@ -15,6 +15,10 @@ public interface ProductMapper {
     void addProduct(Product product);
     @Select("select * from product where product_id=#{productId}")
     Product findProductById(Integer productId);
+<<<<<<< HEAD
     @Update("update product set product_num=#{productNum},product_name=#{productName},product_old_price=#{productOldPrice},product_new_price=#{productNewPrice},create_time=now(),product_status=#{productStatus} where product_id=#{productId}")
+=======
+    @Update("update product set product_name=#{productName},product_old_price=#{productOldPrice},product_new_price=#{productNewPrice},product_country=#{productCountry},product_status=#{productStatus} where product_id=#{productId}")
+>>>>>>> b3b4cd121795b28a32c7f5105673537c874cd6a9
     void updateProduct(Product product);
 }

@@ -13,6 +13,8 @@
         <option value="$PROJECT_DIR$/user-web/pom.xml" />
         <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/config/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/log-receive/pom.xml" />
       </list>
     </option>
   </component>

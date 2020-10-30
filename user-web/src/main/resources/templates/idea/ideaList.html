@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +11,7 @@
 </head>
 <body>
         <div id="app" class="container">
-            <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
+            <button type="button" shiro:hasPermission="idea:addMes" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
             <h1>意见反馈</h1>
             <table class="table table-bordered">
                 <tr>
@@ -34,8 +34,8 @@
                     <td>{{idea.ideaTime}}</td>
                     <td>{{idea.statusId==1?"已浏览":"未浏览"}}</td>
                     <td>{{idea.typeId==1?"投诉":"建议"}}</td>
-                    <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(idea.ideaId)">删除</button>
-                        <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(idea.ideaId)">修改</button></td>
+                    <td><button type="button" shiro:hasPermission="idea:deleteMesById" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(idea.ideaId)">删除</button>
+                        <button type="button" shiro:hasPermission="idea:findMesById" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(idea.ideaId)">修改</button></td>
                 </tr>
             </table>
             <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>

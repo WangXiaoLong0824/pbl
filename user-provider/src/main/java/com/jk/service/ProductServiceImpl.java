@@ -28,7 +28,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void addProduct(Product product) {
-        productMapper.addProduct(product);
+        if (product.getProductId()==null){
+            productMapper.addProduct(product);
+        }
+        else {
+            productMapper.updateProduct(product);
+        }
+
     }
 
     @Override
