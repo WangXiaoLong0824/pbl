@@ -7,21 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="user-provider" />
-        <module name="common" />
-        <module name="config" />
+        <module name="zuul" />
         <module name="user-web" />
+        <module name="common" />
+        <module name="user-provider" />
         <module name="eureka" />
+        <module name="config" />
+        <module name="rabbitmq-send" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rabbitmq-send" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common" options="-parameters" />
       <module name="config" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="rabbitmq-send" options="-parameters" />
       <module name="user-provider" options="-parameters" />
       <module name="user-web" options="-parameters" />
+      <module name="zuul" options="-parameters" />
     </option>
   </component>
 </project>

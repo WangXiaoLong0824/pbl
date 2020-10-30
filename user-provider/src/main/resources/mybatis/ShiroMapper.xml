@@ -11,5 +11,16 @@
                         srp.syspermissionid = sp.id and
                         sp.parentid=#{pid} and
                         sp.type = 'menu'
+
    </select>
+    <select id="selectPowerKeyList" resultType="String">
+        select  sp.percode  from
+        sys_user_role sur,
+        sys_role_permission srp,
+        sys_permission sp
+        where sur.sysuserid=#{id} AND
+        sur.sysroleid = srp.sysroleid AND
+        srp.syspermissionid = sp.id AND
+        srp.syspermissionid=sp.id and (sp.percode &lt;&gt; '' or sp.percode is not NULL)
+    </select>
 </mapper>

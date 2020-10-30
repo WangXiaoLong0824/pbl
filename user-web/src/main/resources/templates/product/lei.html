@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
       xmlns:text-align="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,8 +53,8 @@
 </div>
 <div id="app" class="container">
     <h1>产品列表</h1>
-    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal"><i class="fa fa-file-o"></i> 新建</button>
-    <button type="button" class="btn btn-default" title="删除" onclick="deleteProduct()"><i class="fa fa-trash-o"></i> 删除</button>
+    <button shiro:hasPermission="product:addProduct" type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal"><i class="fa fa-file-o"></i> 新建</button>
+    <button shiro:hasPermission="product:deleteProduct" type="button" class="btn btn-default" title="删除" onclick="deleteProduct()"><i class="fa fa-trash-o"></i> 删除</button>
     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
     <table class="table table-bordered" v-cloak>
         <tr>
@@ -77,7 +78,7 @@
             <td>{{product.createTime}}</td>
             <td>{{product.productStatus==1?"启用":"未启用"}}</td>
             <td>
-                <a class="btn btn-default" data-toggle="modal" data-target="#editModal" @click="findOne(product.productId)">修改</a> |
+                <a class="btn btn-default" shiro:hasPermission="product:findProductById" data-toggle="modal" data-target="#editModal" @click="findOne(product.productId)">修改</a> |
             </td>
         </tr>
     </table>
