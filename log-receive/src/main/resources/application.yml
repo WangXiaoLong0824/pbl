@@ -6,7 +6,7 @@ spring:
     name: log-receive
   data:
     mongodb:
-      host: localhost
+      host: 192.168.2.23
       port: 27017
       database: 2004
   rabbitmq:
