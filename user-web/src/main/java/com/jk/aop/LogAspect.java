@@ -27,8 +27,8 @@ public class LogAspect {
         String methodName=joinPoint.getSignature().getName();
         Object[] args=joinPoint.getArgs();
         StringBuffer sb=new StringBuffer();
-        for (int i = 1; i < args.length; i++) {
-            sb.append("第"+i+"个参数"+args[i]);
+        for (int i = 0; i < args.length; i++) {
+            sb.append("第"+(i+1)+"个参数"+args[i]);
         }
         String responseParams = obj == null ? "" : obj.toString();
         LogBean log=new LogBean();
