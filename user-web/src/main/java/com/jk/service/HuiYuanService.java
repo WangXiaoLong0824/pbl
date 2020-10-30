@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.entity.Idea;
-import com.jk.entity.PageResult;
-import com.jk.entity.Product;
-import com.jk.entity.User;
+import com.jk.entity.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +58,34 @@ public interface HuiYuanService {
 
     @RequestMapping("findMesById")
     public Idea findMesById(@RequestParam Integer ideaId);
+
+
+
+
+    @RequestMapping("findArticlePage")
+    public PageResult findArticlePage(@RequestParam(value= "currPage",defaultValue= "1") Integer currPage, @RequestParam(value= "pageSize",defaultValue= "10") Integer pageSize,@RequestBody Article article);
+
+    @RequestMapping("addArticle")
+    public String addArticle(@RequestBody Article article);
+
+    @RequestMapping("deleteArticleById")
+    public String deleteArticleById(@RequestParam Integer articleId);
+
+    @RequestMapping("findArticleById")
+    public Article findArticleById(@RequestParam Integer articleId);
+
+    @RequestMapping("findImgPage")
+    public PageResult findImgPage(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody Img img);
+
+    @RequestMapping("addImg")
+    public void addImg(@RequestBody Img img);
+
+    @RequestMapping("deleteImgById")
+    public void deleteImgById(@RequestParam Integer imgId);
+
+    @RequestMapping("findImgById")
+    public Img findImgById(@RequestParam Integer imgId);
+
 
 
 

@@ -23,6 +23,10 @@ public class IndexController {
     public String toIdeaList(){ return "idea/ideaList"; }
     @RequestMapping("toMesList")
     public String toMesList(){ return "idea/mesList"; }
+    @RequestMapping("toArticleList")
+    public String toArticleList(){ return "article/articleList"; }
+    @RequestMapping("toImgList")
+    public String toImgList(){ return "img/imgList"; }
 
     @RequestMapping("tohua")
     public String tohua(){

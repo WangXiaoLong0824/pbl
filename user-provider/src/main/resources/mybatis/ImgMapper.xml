@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ImgMapper" >
+
+    <select id="findImgCount" parameterType="Img" resultType="java.lang.Long">
+        select count(*) from t_img
+    </select>
+
+    <select id="findImgPage" resultType="Img">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select * from t_img  ORDER BY sort_id limit ${key_off},${pageSize}
+    </select>
+
+    <insert id="addImg" parameterType="Img">
+        insert into t_img(type_id,sort_id,img,img_time,status_id) values(#{typeId},#{sortId},#{img},#{imgTime},#{statusId})
+    </insert>
+
+    <delete id="deleteImgById" parameterType="int">
+        delete from t_img where img_id = #{imgId}
+    </delete>
+
+    <select id="findImgById" parameterType="int" resultType="Img">
+        select * from t_img where img_id = #{imgId}
+    </select>
+    
+    <update id="updateImg" parameterType="Img">
+        update t_img set type_id=#{typeId},sort_id=#{sortId},img=#{img},img_time=#{imgTime},status_id=#{statusId} where img_id = #{imgId}
+    </update>
+</mapper>
