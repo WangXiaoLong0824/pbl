@@ -47,4 +47,10 @@ public class IndexController {
     public String toproduct(){
         return "product/lei";
     }
+
+    @RequestMapping("brand")
+    public String tobrand(){
+        return "product/brand";
+    }
+
 }

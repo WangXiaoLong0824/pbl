@@ -17,4 +17,5 @@ public interface HuiYuanService {
     User findHuiYuanLevelById(Integer userId);
 
     void updateHuiYuanLevel(User user);
+
 }

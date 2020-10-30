@@ -79,4 +79,22 @@ public interface HuiYuanService {
     public SysUser selectUserInfoByCode(@RequestParam String userCode);
     @RequestMapping("selectTreeList")
     public List<Tree> selectTreeList(@RequestParam Integer id);
+
+
+    @RequestMapping("findPage")
+    public PageResult findPage(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody BrandEntity brand);
+
+    @RequestMapping("addBrand")
+    public void addBrand(@RequestBody BrandEntity brand);
+
+
+    @RequestMapping("deleteBrand")
+    public void deleteBrand(@RequestParam Integer brandId);
+
+
+    @RequestMapping("findOne")
+    public BrandEntity findOne(@RequestParam Integer brandId);
+
+    @RequestMapping("updateBrand")
+    public void updateBrand(@RequestBody BrandEntity brand);
 }
